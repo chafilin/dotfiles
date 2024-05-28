@@ -1,8 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-
-
 ZSH_THEME="robbyrussell"
 
 plugins=(
@@ -18,9 +16,6 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
-
-autoload -U compinit
-compinit -i
 
 source $ZSH/oh-my-zsh.sh
 
@@ -49,6 +44,21 @@ esac
 # cargo env
 source $HOME/.cargo/env
 
+function zr () { zellij run --name "$*" -- zsh -ic "$*";}
+function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
+function zri () { zellij run --name "$*" --in-place -- zsh -ic "$*";}
+function ze () { zellij edit "$*";}
+function zef () { zellij edit --floating "$*";}
+function zei () { zellij edit --in-place "$*";}
+function zpipe () {
+  if [ -z "$1" ]; then
+    zellij pipe;
+  else
+    zellij pipe -p $1;
+  fi
+}
+
+# zellij setup
 export ZELLIJ_AUTO_ATTACH=true
 export ZELLIJ_AUTO_EXIT=true
 eval "$(zellij setup --generate-auto-start zsh)"
