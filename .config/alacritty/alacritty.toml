@@ -10,8 +10,8 @@ decorations = "buttonless"
 dynamic_padding = false
 option_as_alt = "OnlyLeft"
 [window.padding]
-x = 25
-y = 15
+x = 5
+y = 5
 
 
 [font]
