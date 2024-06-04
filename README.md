@@ -3,10 +3,19 @@
 ## Installation
 
 1. Clone the repository
-2. Install homebrew from https://brew.sh/
-3. Install Oh-my-zsh from https://ohmyz.sh/#install
-4. Install stow `brew install stow`
-5. Stow needed parts:
+1. Install homebrew from https://brew.sh/
+1. Install Oh-my-zsh from https://ohmyz.sh/#install
+1. Install stow `brew install stow`
+1. Install needed instruments
+
+```
+brew install zellij
+brew install tmux
+brew install --cask alacritty
+brew install neovim
+```
+
+1. Stow needed parts:
 
 ```bash
 stow zsh
