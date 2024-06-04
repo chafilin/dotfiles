@@ -31,7 +31,6 @@ alias z="zellij"
 alias lzd='lazydocker'
 alias lg='lazygit'
 
-# eval "$(fzf --zsh)"
 eval $(thefuck --alias)
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(rbenv init - zsh)"
@@ -62,4 +61,4 @@ function zpipe () {
 }
 
 # zellij setup
-eval "$(zellij setup --generate-auto-start zsh)"
+# eval "$(zellij setup --generate-auto-start zsh)"
