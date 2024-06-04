@@ -27,6 +27,7 @@ alias tree='eza --tree --level=2 --long --icons --git'
 alias ff="fzf --preview 'bat --style=numbers --color=always --theme=base16 {}'" 
 alias z="zellij"
 alias lzd='lazydocker'
+alias lg='lazygit'
 
 # eval "$(fzf --zsh)"
 eval $(thefuck --alias)
