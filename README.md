@@ -11,3 +11,14 @@
 ```bash
 stow zsh
 ```
+
+## Structure
+
+```
+./
+├── /allacritty
+├── /nvim
+├── /tmux
+├── /zellij
+└── /zsh
+```
