@@ -35,14 +35,6 @@ eval $(thefuck --alias)
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(rbenv init - zsh)"
 
-# pnpm
-export PNPM_HOME="/Users/chafilin/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
 # cargo env
 source $HOME/.cargo/env
 
@@ -60,5 +52,3 @@ function zpipe () {
   fi
 }
 
-# zellij setup
-# eval "$(zellij setup --generate-auto-start zsh)"
