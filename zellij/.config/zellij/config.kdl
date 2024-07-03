@@ -126,7 +126,5 @@ keybinds clear-defaults=true {
     }
 }
 
-scrollback_editor "/opt/homebrew/bin/nvim"
-
 theme "catppuccin-frappe"
-default_layout "compact"
+on_force_close "quit"

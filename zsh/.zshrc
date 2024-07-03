@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="cloud"
 
 plugins=(
   git
@@ -20,6 +20,10 @@ fpath=(~/.zsh/completions $fpath)
 
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 source $ZSH/oh-my-zsh.sh
+
+# Editor used by CLI
+export EDITOR="nvim"
+export SUDO_EDITOR="nvim"
 
 # User configuration
 alias cat='bat -pp --theme=base16'
@@ -52,3 +56,9 @@ function zpipe () {
   fi
 }
 
+
+# Created by `pipx` on 2024-06-25 12:25:47
+export PATH="$PATH:/Users/chafilin/.local/bin"
+
+export ZELLIJ_AUTO_EXIT=true
+eval "$(zellij setup --generate-auto-start zsh)"
