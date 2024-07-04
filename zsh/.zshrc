@@ -35,7 +35,6 @@ alias z="zellij"
 alias lzd='lazydocker'
 alias lg='lazygit'
 
-eval $(thefuck --alias)
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(rbenv init - zsh)"
 
@@ -66,7 +65,7 @@ if [[ -z "$ZELLIJ" ]]; then
     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
         zellij attach -c
     else
-        zellij -l welcome
+        zellij
     fi
 
     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
