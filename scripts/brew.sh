@@ -13,7 +13,6 @@ brew install zoxide
 brew install neovim
 brew install jesseduffield/lazygit/lazygit
 brew install jesseduffield/lazydocker/lazydocker
-brew install rbenv
 brew install ripgrep
 brew install fd
 brew install --cask alacritty
