@@ -7,13 +7,10 @@ ZSH_CUSTOM=$HOME/.zsh/custom
 plugins=(
   git
   rails
-  ruby
   node
   fzf
   fzf-tab
   nvm
-  docker
-  docker-compose
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -55,10 +52,6 @@ function zpipe () {
     zellij pipe -p $1;
   fi
 }
-
-
-# Created by `pipx` on 2024-06-25 12:25:47
-export PATH="$PATH:/Users/chafilin/.local/bin"
 
 export ZELLIJ_AUTO_EXIT=true
 
