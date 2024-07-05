@@ -12,6 +12,7 @@ Run `sh ./scripts/install.sh`
 ./
 ├── /allacritty
 ├── /nvim
+├── /scripts
 ├── /tmux
 ├── /zellij
 └── /zsh
