@@ -127,4 +127,5 @@ keybinds clear-defaults=true {
 }
 
 theme "catppuccin-frappe"
+default_layout "compact"
 on_force_close "quit"
