@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="cloud"
+ZSH_THEME="robbyrussell"
 ZSH_CUSTOM=$HOME/.zsh/custom
 
 plugins=(
@@ -25,10 +25,10 @@ export SUDO_EDITOR="nvim"
 
 # User configuration
 alias cat='bat -pp --theme=base16'
-alias ls='eza -lh --group-directories-first --icons' 
+alias ls='eza -lh --group-directories-first --icons'
 alias ll='eza -alh'
 alias tree='eza --tree --level=2 --long --icons --git'
-alias ff="fzf --preview 'bat --style=numbers --color=always --theme=base16 {}'" 
+alias ff="fzf --preview 'bat --style=numbers --color=always --theme=base16 {}'"
 alias z="zellij"
 alias lzd='lazydocker'
 alias lg='lazygit'
@@ -55,7 +55,7 @@ function zpipe () {
 
 export ZELLIJ_AUTO_EXIT=true
 
-if [[ -z "$ZELLIJ" ]]; then
+if [[ -z "$ZELLIJ" && "$TERM_PROGRAM" != "vscode" ]]; then
     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
         zellij attach -c
     else
