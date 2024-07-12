@@ -55,7 +55,7 @@ function zpipe () {
 
 export ZELLIJ_AUTO_EXIT=true
 
-if [[ -z "$ZELLIJ" && "$TERM_PROGRAM" != "vscode" ]]; then
+if [[ -z "$ZELLIJ" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal"  ]]; then
     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
         zellij attach -c
     else
