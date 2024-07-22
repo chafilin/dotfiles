@@ -12,9 +12,7 @@ brew install tmux
 brew install zoxide
 brew install neovim
 brew install jesseduffield/lazygit/lazygit
-brew install jesseduffield/lazydocker/lazydocker
+# brew install jesseduffield/lazydocker/lazydocker
 brew install ripgrep
 brew install fd
 brew install --cask alacritty
-brew install --cask google-chrome
-brew install --cask visual-studio-code

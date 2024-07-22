@@ -6,7 +6,6 @@ ZSH_CUSTOM=$HOME/.zsh/custom
 
 plugins=(
   git
-  rails
   node
   fzf
   fzf-tab
@@ -34,10 +33,6 @@ alias lzd='lazydocker'
 alias lg='lazygit'
 
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(rbenv init - zsh)"
-
-# cargo env
-source $HOME/.cargo/env
 
 function zr () { zellij run --name "$*" -- zsh -ic "$*";}
 function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
