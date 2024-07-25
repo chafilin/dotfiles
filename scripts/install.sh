@@ -1,6 +1,8 @@
 source ./scripts/brew.sh
 
-source ./scripts/curls.sh
+source ./scripts/kitty.sh
+
+source ./scripts/oh-my-zsh.sh
 
 source ./scripts/stow.sh
 
