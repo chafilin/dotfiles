@@ -48,16 +48,16 @@ function zpipe () {
   fi
 }
 
-export ZELLIJ_AUTO_EXIT=true
-
-if [[ -z "$ZELLIJ" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal"  ]]; then
-    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-        zellij attach -c
-    else
-        zellij
-    fi
-
-    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-        exit
-    fi
-fi
+# export ZELLIJ_AUTO_EXIT=true
+#
+# if [[ -z "$ZELLIJ" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal"  ]]; then
+#     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+#         zellij attach -c
+#     else
+#         zellij
+#     fi
+#
+#     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+#         exit
+#     fi
+# fi
