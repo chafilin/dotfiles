@@ -1,8 +1,8 @@
 return {
-  "nvim-neo-tree/neo-tree.nvim",
-  opts = {
-    window = {
-      position = "right",
-    },
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      opts.sections.lualine_z = {}
+    end,
   },
 }

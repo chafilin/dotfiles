@@ -7,11 +7,9 @@ return {
       require("catppuccin").setup({ flavour = "frappe" })
     end,
   },
-
   {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
-    },
+    "folke/tokyonight.nvim",
+    lazy = true,
+    opts = { style = "night" },
   },
 }
