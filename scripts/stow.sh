@@ -1,30 +1,30 @@
 read -p "Do you want to stow zsh? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    stow zsh
+    stow -t ~/. zsh
 fi
 
 read -p "Do you want to stow allacritty? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    stow allacritty
+    stow -t ~/. allacritty
 fi
 
 read -p "Do you want to stow nvim? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    stow nvim
+    stow -t ~/. nvim
 fi
 
 read -p "Do you want to stow tmux? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    stow tmux
+    stow -t ~/. tmux
 fi
 
 read -p "Do you want to stow zellij? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    stow zellij
+    stow -t ~/. zellij
 fi
 
