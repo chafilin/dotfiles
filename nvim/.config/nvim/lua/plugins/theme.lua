@@ -4,12 +4,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     config = function()
-      require("catppuccin").setup({ flavour = "frappe" })
+      require("catppuccin").setup({ flavour = "macchiato" })
     end,
-  },
-  {
-    "folke/tokyonight.nvim",
-    lazy = true,
-    opts = { style = "night" },
   },
 }

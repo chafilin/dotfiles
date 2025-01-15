@@ -28,3 +28,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     stow -t ~/. zellij
 fi
 
+read -p "Do you want to stow ghostty? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    stow -t ~/. ghostty
+fi
+
