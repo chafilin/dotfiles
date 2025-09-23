@@ -9,7 +9,6 @@ plugins=(
   node
   fzf
   fzf-tab
-  nvm
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -34,37 +33,10 @@ alias lg='lazygit'
 
 eval "$(zoxide init --cmd cd zsh)"
 
-function zr () { zellij run --name "$*" -- zsh -ic "$*";}
-function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
-function zri () { zellij run --name "$*" --in-place -- zsh -ic "$*";}
-function ze () { zellij edit "$*";}
-function zef () { zellij edit --floating "$*";}
-function zei () { zellij edit --in-place "$*";}
-function zpipe () {
-  if [ -z "$1" ]; then
-    zellij pipe;
-  else
-    zellij pipe -p $1;
-  fi
-}
-
-# export ZELLIJ_AUTO_EXIT=true
-#
-# if [[ -z "$ZELLIJ" && "$TERM_PROGRAM" != "vscode" && "$TERM_PROGRAM" != "WarpTerminal"  ]]; then
-#     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-#         zellij attach -c
-#     else
-#         zellij
-#     fi
-#
-#     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-#         exit
-#     fi
-# fi
-
 # bun completions
 [ -s "/Users/vladimir.shchedrin/.bun/_bun" ] && source "/Users/vladimir.shchedrin/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
