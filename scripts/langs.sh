@@ -1,8 +1,8 @@
-echo "Installing node version manager"
-read -p "Do you want to install node version manager? (y/n) " -n 1 -r
+echo "Installing asdf"
+read -p "Do you want to install asdf? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+  brew install asdf
 fi
 
 echo "Installing pnpm"
