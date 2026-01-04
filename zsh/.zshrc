@@ -5,6 +5,9 @@
 # --- Only run heavy init in interactive shells ---
 [[ $- != *i* ]] && return
 
+# --- Skip global compinit (OMZ will handle it) ---
+skip_global_compinit=1
+
 # --- Oh My Zsh setup ---
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
@@ -104,16 +107,34 @@ alias z="zellij"
 alias lzd='lazydocker'
 alias lg='lazygit'
 
-# --- zoxide ---
-eval "$(zoxide init --cmd cd zsh)"
+# --- zoxide (cached for performance) ---
+_zoxide_cache="$HOME/.cache/zsh/zoxide-init.zsh"
+if [[ ! -s "$_zoxide_cache" ]] || [[ "$_zoxide_cache" -ot "$(command -v zoxide 2>/dev/null)" ]]; then
+  mkdir -p "${_zoxide_cache:h}"
+  zoxide init --cmd cd zsh > "$_zoxide_cache" 2>/dev/null
+fi
+[[ -s "$_zoxide_cache" ]] && source "$_zoxide_cache"
 
-# --- bun completions ---
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+# --- bun completions (lazy loaded) ---
+if [[ -s "$HOME/.bun/_bun" ]]; then
+  _bun_comp_lazy() {
+    source "$HOME/.bun/_bun"
+    unset -f _bun_comp_lazy
+  }
+  # Load on first bun command
+  bun() { _bun_comp_lazy; command bun "$@"; }
+fi
 
 # --- bun / asdf paths ---
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# --- Compile zsh files for faster loading (run manually: zcompile ~/.zshrc) ---
+# Auto-compile .zshrc if modified
+if [[ ! -f ~/.zshrc.zwc ]] || [[ ~/.zshrc -nt ~/.zshrc.zwc ]]; then
+  zcompile ~/.zshrc &>/dev/null &!
+fi
 
 # --- Profile output (enable to check) ---
 # zprof

@@ -25,15 +25,21 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = {} },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  -- Disable automatic update checking to improve startup time (run :Lazy sync manually when needed)
+  checker = { enabled = false, notify = false },
   performance = {
+    cache = {
+      enabled = true,
+    },
+    reset_packpath = true, -- reset the package path to improve startup time
     rtp = {
+      reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
