@@ -118,3 +118,4 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # --- Profile output (enable to check) ---
 # zprof
 
+export PATH="$HOME/.local/bin:$PATH"

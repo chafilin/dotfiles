@@ -3,3 +3,4 @@ macos-option-as-alt = left
 keybind = cmd+backspace=text:\x15
 keybind = opt+backspace=text:\x17
 keybind = command+k=text:\x0c
+keybind = shift+enter=text:\x1b\r
