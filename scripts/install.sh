@@ -69,7 +69,7 @@ echo "  Usage: Run 'zellij' or alias 'z'"
 echo ""
 echo "→ Neovim with LazyVim + modern plugins"
 echo "  First launch will install plugins automatically"
-echo "  Includes: Codeium AI, Harpoon, Flash, Conform, and more"
+echo "  Includes: Harpoon, Flash, Conform, and more"
 
 # Git
 echo ""

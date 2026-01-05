@@ -40,7 +40,6 @@ A blazingly fast, modern development environment built from scratch with perform
 - 🎨 **Catppuccin theme** - Beautiful, easy on the eyes
 
 ### Editor (Neovim)
-- 🤖 **AI Assistance** - Codeium (free) with optional Copilot support
 - 📌 **Harpoon** - Lightning-fast file bookmarking
 - ⚡ **Flash.nvim** - Jump anywhere with 2-3 keystrokes
 - 🎨 **Conform.nvim** - Modern async formatting
