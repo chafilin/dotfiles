@@ -1,0 +1,102 @@
+# Atuin configuration
+# Modern shell history with sync, search, and statistics
+
+## Sync
+# Enable sync (requires atuin account - optional)
+sync_address = "https://api.atuin.sh"
+sync_frequency = "10m"
+auto_sync = false  # Set to true if you want to sync across machines
+
+## Search
+# Search mode: prefix, fulltext, fuzzy, skim
+search_mode = "fuzzy"
+
+# Search filtering
+filter_mode = "global"  # global, host, session, directory
+filter_mode_shell_up_key_binding = "directory"  # What mode to use for up arrow
+
+# Inline search height
+inline_height = 20
+
+# Show preview of command
+show_preview = true
+
+# Show help in search UI
+show_help = true
+
+# Exit search on key press (else, dismiss preview)
+exit_mode = "return-query"
+
+# Keymap mode: vim, emacs, auto
+keymap_mode = "auto"
+
+# Cursor style
+keymap_cursor = {
+  emacs = "blink-block",
+  vim_insert = "blink-block",
+  vim_normal = "steady-block",
+}
+
+## Statistics
+# Show statistics and command insights
+stats = {
+  common_subcommands = ["cargo", "go", "git", "npm", "yarn", "pnpm"],
+  common_prefix = ["sudo"],
+}
+
+## UI
+# Inline or fullscreen
+style = "compact"  # auto, full, compact
+
+# Show tabs for search/inspect
+show_tabs = true
+
+# Catppuccin Macchiato theme colors
+[theme]
+# Use built-in theme or custom
+use_builtin_theme = false
+
+# Custom colors (Catppuccin Macchiato inspired)
+foreground = "#cad3f5"
+background = "#24273a"
+border = "#8aadf4"
+match = "#ed8796"
+selected_match = "#f4dbd6"
+
+## History
+# Where to store history
+db_path = "~/.local/share/atuin/history.db"
+
+# How many entries to show in search
+max_preview_height = 10
+
+# Record exit codes
+exit_mode = "return-query"
+
+# Enable or disable up-arrow replacement
+# We disable it in .zshrc init to keep ctrl-r only
+up_arrow = false
+
+# Ignore commands
+history_filter = [
+  "^ls",
+  "^cd",
+  "^pwd",
+  "^exit",
+  "^clear",
+]
+
+# Update database on search
+update_db_search = true
+
+# Delete old duplicates
+enter_accept = true
+
+## Common commands
+# Commands to ignore (privacy)
+# Add any sensitive commands you don't want recorded
+# history_filter = ["^secret", "^password"]
+
+## Daemon
+# Enable daemon for better performance (optional)
+# daemon = { enabled = true, sync_frequency = "10m" }

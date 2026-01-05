@@ -1,0 +1,195 @@
+# Starship prompt configuration
+# Modern, fast, informative
+# Theme: Catppuccin Macchiato
+
+# Timeout for starship to execute commands (ms)
+command_timeout = 1000
+scan_timeout = 30
+
+# Add newline before prompt
+add_newline = true
+
+# Format
+format = """
+[╭─](bold blue)$username$hostname$directory$git_branch$git_status$git_state\
+$nodejs$python$rust$golang$java$ruby$lua$package\
+$docker_context$kubernetes\
+$cmd_duration$jobs$battery$time
+[╰─](bold blue)$character"""
+
+# Prompt character
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+vimcmd_symbol = "[←](bold green)"
+
+# Username
+[username]
+format = "[$user]($style)@"
+style_user = "bold yellow"
+style_root = "bold red"
+show_always = false
+
+# Hostname
+[hostname]
+format = "[$hostname]($style) in "
+style = "bold cyan"
+ssh_only = true
+disabled = false
+
+# Directory
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "bold cyan"
+truncation_length = 3
+truncate_to_repo = true
+truncation_symbol = "…/"
+read_only = " 󰌾"
+read_only_style = "red"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Developer" = " "
+
+# Git branch
+[git_branch]
+format = "on [$symbol$branch(:$remote_branch)]($style) "
+symbol = " "
+style = "bold purple"
+truncation_length = 20
+truncation_symbol = "…"
+
+# Git status
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold red"
+conflicted = "🏳"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "$${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+# Git state (rebase, merge, etc)
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+# Command duration
+[cmd_duration]
+min_time = 500
+format = "took [$duration]($style) "
+style = "bold yellow"
+
+# Time
+[time]
+disabled = true
+format = "🕙[$time]($style) "
+style = "bold white"
+time_format = "%T"
+
+# Jobs
+[jobs]
+format = "[$symbol$number]($style) "
+symbol = "✦ "
+style = "bold blue"
+number_threshold = 1
+
+# Battery
+[battery]
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+unknown_symbol = " "
+empty_symbol = " "
+
+[[battery.display]]
+threshold = 10
+style = "bold red"
+
+[[battery.display]]
+threshold = 30
+style = "bold yellow"
+
+# Language versions
+[nodejs]
+format = "via [$symbol($version )]($style)"
+symbol = " "
+style = "bold green"
+detect_extensions = ["js", "mjs", "cjs", "ts"]
+
+[python]
+format = 'via [$symbol$pyenv_prefix($version )(\($virtualenv\) )]($style)'
+symbol = " "
+style = "yellow bold"
+pyenv_version_name = false
+detect_extensions = ["py"]
+
+[rust]
+format = "via [$symbol($version )]($style)"
+symbol = " "
+style = "bold red"
+
+[golang]
+format = "via [$symbol($version )]($style)"
+symbol = " "
+style = "bold cyan"
+
+[java]
+format = "via [$symbol($version )]($style)"
+symbol = " "
+style = "bold red"
+
+[ruby]
+format = "via [$symbol($version )]($style)"
+symbol = " "
+style = "bold red"
+
+[lua]
+format = "via [$symbol($version )]($style)"
+symbol = " "
+style = "bold blue"
+
+# Package version
+[package]
+format = "is [$symbol$version]($style) "
+symbol = "📦 "
+style = "208 bold"
+display_private = false
+
+# Docker
+[docker_context]
+format = "via [$symbol$context]($style) "
+symbol = " "
+style = "bold blue"
+only_with_files = true
+
+# Kubernetes
+[kubernetes]
+format = 'on [⛵ $context \($namespace\)](dimmed green) '
+disabled = false
+[kubernetes.context_aliases]
+"dev.local.cluster.k8s" = "dev"
+
+# Disable modules we don't need
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[conda]
+disabled = true
+
+[perl]
+disabled = true
+
+[php]
+disabled = true

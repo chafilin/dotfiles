@@ -1,0 +1,14 @@
+# Antidote plugin bundle
+# Minimal, essential plugins only
+
+# Completions
+zsh-users/zsh-completions
+
+# Fish-like autosuggestions
+zsh-users/zsh-autosuggestions
+
+# Syntax highlighting (must be last)
+zsh-users/zsh-syntax-highlighting
+
+# FZF tab completion
+Aloxaf/fzf-tab

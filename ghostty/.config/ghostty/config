@@ -1,6 +1,81 @@
+# Ghostty Terminal Configuration
+# Modern, GPU-accelerated terminal
+
+# Theme
 theme = Catppuccin Macchiato
+
+# Font
+font-family = JetBrains Mono
+font-size = 13
+font-thicken = true
+
+# Performance
+vsync = true
+# Enable GPU rendering for better performance
+renderer = auto
+
+# Window
+window-padding-x = 8
+window-padding-y = 8
+window-decoration = true
+window-theme = auto
+
+# Behavior
+mouse-hide-while-typing = true
+clipboard-read = allow
+clipboard-write = allow
+clipboard-paste-protection = false
+clipboard-paste-bracketed-safe = true
+
+# Shell integration
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# Cursor
+cursor-style = block
+cursor-style-blink = true
+
+# macOS specific
 macos-option-as-alt = left
+macos-titlebar-style = native
+
+# Keybindings (macOS-friendly)
 keybind = cmd+backspace=text:\x15
 keybind = opt+backspace=text:\x17
 keybind = command+k=text:\x0c
 keybind = shift+enter=text:\x1b\r
+
+# Tab/Window management (don't conflict with Zellij)
+keybind = cmd+t=new_tab
+keybind = cmd+w=close_surface
+keybind = cmd+n=new_window
+keybind = cmd+1=goto_tab:1
+keybind = cmd+2=goto_tab:2
+keybind = cmd+3=goto_tab:3
+keybind = cmd+4=goto_tab:4
+keybind = cmd+5=goto_tab:5
+keybind = cmd+6=goto_tab:6
+keybind = cmd+7=goto_tab:7
+keybind = cmd+8=goto_tab:8
+keybind = cmd+9=goto_tab:9
+
+# Copy/Paste
+keybind = cmd+c=copy_to_clipboard
+keybind = cmd+v=paste_from_clipboard
+
+# Zoom
+keybind = cmd+plus=increase_font_size:1
+keybind = cmd+minus=decrease_font_size:1
+keybind = cmd+zero=reset_font_size
+
+# Scrollback
+scrollback-limit = 10000
+
+# Link handling
+link-url = true
+
+# Bell
+bell = none
+
+# Background opacity (1.0 = fully opaque, 0.0 = fully transparent)
+background-opacity = 1.0
