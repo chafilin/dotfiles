@@ -99,7 +99,8 @@ dotfiles/
 │   ├── brew.sh     # All tools installation
 │   ├── install.sh  # Main installer
 │   ├── stow.sh     # Interactive stow
-│   └── langs.sh    # Language tools
+│   ├── langs.sh    # Language tools
+│   └── cleanup.sh  # Uninstall script
 ├── starship/       # Prompt configuration
 ├── tmux/           # Tmux (optional)
 ├── zellij/         # Zellij multiplexer
@@ -234,6 +235,23 @@ All tools use Catppuccin Macchiato. To change:
 ### Aliases
 
 Edit `zsh/.zshrc` - look for the "Aliases" section.
+
+## Cleanup & Uninstall
+
+To remove dotfiles configurations:
+
+```bash
+# Run cleanup script
+sh ./scripts/cleanup.sh
+```
+
+The cleanup script will:
+- Unstow all configurations (interactive)
+- Remove cache files and generated data
+- Optionally uninstall Homebrew packages
+- Clean up shell and editor state
+
+**Note**: This is interactive and safe - you'll be prompted for each step.
 
 ## Troubleshooting
 
