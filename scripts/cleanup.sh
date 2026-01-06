@@ -1,5 +1,5 @@
 #!/bin/bash
-# Cleanup script for modern dotfiles
+# Cleanup script for dotfiles
 # Removes stowed configurations and optionally cleans up installed tools
 
 set -e
@@ -34,9 +34,6 @@ echo ""
 
 unstow_package "zsh" "Zsh configuration"
 unstow_package "nvim" "Neovim configuration"
-unstow_package "git" "Git configuration"
-unstow_package "starship" "Starship prompt"
-unstow_package "atuin" "Atuin history"
 unstow_package "ghostty" "Ghostty terminal"
 unstow_package "zellij" "Zellij multiplexer"
 unstow_package "tmux" "Tmux configuration"
@@ -48,16 +45,14 @@ echo "Step 2: Clean Cache Files"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-read -p "Remove zsh cache files? (y/n) " -n 1 -r
+read -p "Remove Oh My Zsh and cache files? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    rm -rf ~/.cache/zsh
+    rm -rf ~/.oh-my-zsh
     rm -f ~/.zcompdump*
     rm -f ~/.zsh_history
     rm -f ~/.zshrc.zwc
-    rm -f ~/.zsh_plugins.zsh
-    rm -f ~/.cache/brew-prefix
-    echo "✓ Zsh cache cleaned"
+    echo "✓ Oh My Zsh and cache cleaned"
 fi
 
 read -p "Remove Neovim cache and plugins? (y/n) " -n 1 -r
@@ -69,18 +64,18 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "✓ Neovim cache and plugins removed"
 fi
 
-read -p "Remove Atuin database? (WARNING: This deletes your shell history!) (y/n) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    rm -rf ~/.local/share/atuin
-    echo "✓ Atuin database removed"
-fi
-
 read -p "Remove Zellij cache? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     rm -rf ~/.cache/zellij
     echo "✓ Zellij cache removed"
+fi
+
+read -p "Remove Tmux plugins? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    rm -rf ~/.tmux
+    echo "✓ Tmux plugins removed"
 fi
 
 # Optional: Uninstall packages
@@ -90,7 +85,7 @@ echo "Step 3: Uninstall Packages (Optional)"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "Do you want to uninstall Homebrew packages?"
-echo "This will remove all tools installed by the dotfiles setup."
+echo "This will remove tools installed by the dotfiles setup."
 echo ""
 
 read -p "Uninstall packages? (y/n) " -n 1 -r
@@ -99,34 +94,17 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo ""
     echo "Uninstalling packages..."
 
-    # Core tools
+    # Tools from brew.sh
     packages=(
-        "antidote"
-        "starship"
-        "atuin"
-        "zellij"
         "eza"
-        "bat"
-        "fd"
-        "ripgrep"
-        "sd"
-        "zoxide"
-        "bottom"
-        "procs"
-        "dust"
-        "duf"
         "fzf"
-        "direnv"
-        "mise"
-        "git-delta"
+        "gh"
+        "bat"
+        "zellij"
+        "zoxide"
         "lazygit"
-        "lazydocker"
-        "git-absorb"
-        "httpie"
-        "jq"
-        "yq"
-        "glow"
-        "tlrc"
+        "ripgrep"
+        "fd"
     )
 
     for pkg in "${packages[@]}"; do
@@ -134,11 +112,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
             brew uninstall "$pkg" 2>/dev/null && echo "✓ Uninstalled $pkg" || echo "⚠ Failed to uninstall $pkg"
         fi
     done
-
-    # Cask
-    if brew list --cask ghostty &>/dev/null; then
-        brew uninstall --cask ghostty 2>/dev/null && echo "✓ Uninstalled Ghostty" || echo "⚠ Failed to uninstall Ghostty"
-    fi
 
     echo ""
     echo "Note: Core tools like git, neovim, tmux, and stow were not removed."
@@ -159,16 +132,6 @@ if [ -f ~/.zshrc ]; then
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         rm ~/.zshrc
         echo "✓ ~/.zshrc removed"
-    fi
-fi
-
-if [ -f ~/.gitconfig ]; then
-    echo "⚠ Warning: ~/.gitconfig still exists (not managed by stow)"
-    read -p "Remove ~/.gitconfig? (y/n) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        rm ~/.gitconfig
-        echo "✓ ~/.gitconfig removed"
     fi
 fi
 
