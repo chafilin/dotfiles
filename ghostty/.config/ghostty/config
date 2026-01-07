@@ -9,11 +9,6 @@ font-family = JetBrains Mono
 font-size = 13
 font-thicken = true
 
-# Performance
-vsync = true
-# Use automatic renderer selection (GPU when available)
-renderer = auto
-
 # Window
 window-padding-x = 8
 window-padding-y = 8
@@ -73,9 +68,6 @@ scrollback-limit = 10000
 
 # Link handling
 link-url = true
-
-# Bell
-bell = none
 
 # Background opacity (1.0 = fully opaque, 0.0 = fully transparent)
 background-opacity = 1.0
