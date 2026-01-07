@@ -1,6 +1,15 @@
 #!/bin/bash
 # Modern dotfiles installation script
 
+on_interrupt() {
+  echo ""
+  echo "!! Installation interrupted by user (Ctrl+C)."
+  echo "   Some steps may not have completed."
+  echo "   You can safely re-run ./scripts/install.sh to resume or repair the setup."
+  exit 130
+}
+
+trap on_interrupt INT
 set -e  # Exit on error
 
 echo "╔══════════════════════════════════════════════════════════╗"
