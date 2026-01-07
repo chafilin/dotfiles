@@ -40,7 +40,6 @@ brew install mise           # Modern asdf alternative
 echo 'Installing Git tools...'
 brew install git-delta      # Beautiful git diffs
 brew install jesseduffield/lazygit/lazygit
-brew install git-absorb     # Auto fixup commits
 brew install jesseduffield/lazydocker/lazydocker
 
 echo 'Installing productivity tools...'
