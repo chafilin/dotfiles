@@ -59,34 +59,83 @@ echo ""
 read -p "Remove Oh My Zsh and cache files? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    rm -rf ~/.oh-my-zsh
-    rm -f ~/.zcompdump*
-    rm -f ~/.zsh_history
-    rm -f ~/.zshrc.zwc
-    echo "✓ Oh My Zsh and cache cleaned"
+    removed_any=false
+
+    if [ -d ~/.oh-my-zsh ]; then
+        rm -rf ~/.oh-my-zsh
+        removed_any=true
+    fi
+
+    # Match zcompdump files if any exist
+    if compgen -G "$HOME/.zcompdump*" > /dev/null; then
+        rm -f "$HOME"/.zcompdump*
+        removed_any=true
+    fi
+
+    if [ -f ~/.zsh_history ]; then
+        rm -f ~/.zsh_history
+        removed_any=true
+    fi
+
+    if [ -f ~/.zshrc.zwc ]; then
+        rm -f ~/.zshrc.zwc
+        removed_any=true
+    fi
+
+    if [ "$removed_any" = true ]; then
+        echo "✓ Oh My Zsh and cache cleaned"
+    else
+        echo "ℹ Skipped: no Oh My Zsh installation or cache files found"
+    fi
 fi
 
 read -p "Remove Neovim cache and plugins? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    rm -rf ~/.local/share/nvim
-    rm -rf ~/.local/state/nvim
-    rm -rf ~/.cache/nvim
-    echo "✓ Neovim cache and plugins removed"
+    removed_any=false
+
+    if [ -d ~/.local/share/nvim ]; then
+        rm -rf ~/.local/share/nvim
+        removed_any=true
+    fi
+
+    if [ -d ~/.local/state/nvim ]; then
+        rm -rf ~/.local/state/nvim
+        removed_any=true
+    fi
+
+    if [ -d ~/.cache/nvim ]; then
+        rm -rf ~/.cache/nvim
+        removed_any=true
+    fi
+
+    if [ "$removed_any" = true ]; then
+        echo "✓ Neovim cache and plugins removed"
+    else
+        echo "ℹ Skipped: no Neovim cache or plugin directories found"
+    fi
 fi
 
 read -p "Remove Zellij cache? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    rm -rf ~/.cache/zellij
-    echo "✓ Zellij cache removed"
+    if [ -d ~/.cache/zellij ]; then
+        rm -rf ~/.cache/zellij
+        echo "✓ Zellij cache removed"
+    else
+        echo "ℹ Skipped: Zellij cache directory not found (~/.cache/zellij)"
+    fi
 fi
 
 read -p "Remove Tmux plugins? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    rm -rf ~/.tmux
-    echo "✓ Tmux plugins removed"
+    if [ -d ~/.tmux ]; then
+        rm -rf ~/.tmux
+        echo "✓ Tmux plugins removed"
+    else
+        echo "ℹ Skipped: Tmux plugins directory not found (~/.tmux)"
+    fi
 fi
 
 # Optional: Uninstall packages
