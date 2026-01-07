@@ -58,7 +58,7 @@ A blazingly fast, modern development environment built from scratch with perform
 
 ```bash
 # Clone with submodules
-git clone --recurse-submodules https://github.com/yourusername/dotfiles.git ~/dotfiles
+git clone --recurse-submodules https://github.com/YOUR_USERNAME/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
 # Run full setup
