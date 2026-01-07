@@ -120,7 +120,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
     for pkg in "${packages[@]}"; do
         if brew list "$pkg" &>/dev/null; then
-            brew uninstall "$pkg" 2>/dev/null && echo "✓ Uninstalled $pkg" || echo "⚠ Failed to uninstall $pkg"
+            brew uninstall "$pkg" && echo "✓ Uninstalled $pkg" || echo "⚠ Failed to uninstall $pkg"
         fi
     done
 
