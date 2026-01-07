@@ -75,7 +75,7 @@ The installer will:
 
 ```bash
 # Update tools
-brew bundle --file=scripts/brew.sh
+sh ./scripts/brew.sh
 
 # Stow specific configs
 stow -t ~/. zsh
