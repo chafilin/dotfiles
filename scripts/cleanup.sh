@@ -20,8 +20,19 @@ unstow_package() {
         read -p "Unstow $name? (y/n) " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
+            # Temporarily disable exit-on-error to handle stow failures gracefully
+            set +e
             stow -D -t ~/. "$package"
-            echo "✓ $name unstowed"
+            local status=$?
+            # Re-enable exit-on-error for the rest of the script
+            set -e
+
+            if [ "$status" -eq 0 ]; then
+                echo "✓ $name unstowed"
+            else
+                echo "✗ Failed to unstow $name (stow exited with code $status)"
+                echo "   Please check that 'stow' is installed and that there are no conflicting files."
+            fi
         fi
     fi
 }
