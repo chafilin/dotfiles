@@ -11,7 +11,7 @@ font-thicken = true
 
 # Performance
 vsync = true
-# Enable GPU rendering for better performance
+# Use automatic renderer selection (GPU when available)
 renderer = auto
 
 # Window
