@@ -71,7 +71,6 @@ db_path = "~/.local/share/atuin/history.db"
 max_preview_height = 10
 
 # Record exit codes
-exit_mode = "return-query"
 
 # Enable or disable up-arrow replacement
 # We disable it in .zshrc init to keep ctrl-r only
