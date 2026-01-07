@@ -157,3 +157,6 @@ setopt INTERACTIVE_COMMENTS # allow comments in interactive mode
 setopt HIST_IGNORE_ALL_DUPS # remove older duplicate entries from history
 setopt HIST_REDUCE_BLANKS   # remove blanks from history
 setopt SHARE_HISTORY        # share history between sessions
+
+# bun completions
+[ -s "/Users/vladimir.shchedrin/.bun/_bun" ] && source "/Users/vladimir.shchedrin/.bun/_bun"

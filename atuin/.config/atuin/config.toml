@@ -31,18 +31,11 @@ exit_mode = "return-query"
 keymap_mode = "auto"
 
 # Cursor style
-keymap_cursor = {
-  emacs = "blink-block",
-  vim_insert = "blink-block",
-  vim_normal = "steady-block",
-}
+keymap_cursor = { emacs = "blink-block", vim_insert = "blink-block", vim_normal = "steady-block" }
 
 ## Statistics
 # Show statistics and command insights
-stats = {
-  common_subcommands = ["cargo", "go", "git", "npm", "yarn", "pnpm"],
-  common_prefix = ["sudo"],
-}
+stats = { common_subcommands = ["cargo", "go", "git", "npm", "yarn", "pnpm"], common_prefix = ["sudo"] }
 
 ## UI
 # Inline or fullscreen
