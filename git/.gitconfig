@@ -1,0 +1,155 @@
+# Modern Git configuration with delta
+
+[core]
+	editor = nvim
+	pager = delta
+	autocrlf = input
+	whitespace = trailing-space,space-before-tab
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false
+
+[push]
+	default = simple
+	followTags = true
+
+[fetch]
+	prune = true
+
+[merge]
+	conflictstyle = diff3
+	tool = nvim
+
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[diff]
+	colorMoved = default
+	algorithm = histogram
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	# General
+	navigate = true
+	light = false
+	side-by-side = true
+	line-numbers = true
+
+	# Theme: Catppuccin Macchiato
+	syntax-theme = Catppuccin-macchiato
+
+	# Layout
+	line-numbers-left-format = "{nm:>4}┊"
+	line-numbers-right-format = "{np:>4}│"
+
+	# Colors (Catppuccin Macchiato)
+	minus-style = syntax "#3e2e34"
+	minus-emph-style = syntax "#59333d"
+	plus-style = syntax "#2d3f3b"
+	plus-emph-style = syntax "#36544e"
+
+	# Line numbers
+	line-numbers-minus-style = "#ed8796"
+	line-numbers-plus-style = "#a6da95"
+	line-numbers-zero-style = "#6e738d"
+
+	# Commit styling
+	commit-decoration-style = bold yellow box
+	file-style = bold yellow
+	file-decoration-style = none
+	hunk-header-decoration-style = cyan box
+	hunk-header-file-style = red
+	hunk-header-line-number-style = cyan
+	hunk-header-style = file line-number syntax
+
+[delta "interactive"]
+	keep-plus-minus-markers = false
+
+[delta "decorations"]
+	commit-decoration-style = blue ol
+	commit-style = raw
+	file-style = omit
+	hunk-header-decoration-style = blue box
+	hunk-header-file-style = red
+	hunk-header-line-number-style = "#067a00"
+	hunk-header-style = file line-number syntax
+
+# Aliases
+[alias]
+	# Short status
+	st = status -sb
+
+	# Pretty log
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+
+	# Show commits
+	last = log -1 HEAD --stat
+
+	# Diff
+	df = diff
+	dc = diff --cached
+
+	# Add and commit
+	ac = !git add -A && git commit
+
+	# Amend
+	amend = commit --amend --no-edit
+
+	# Undo last commit but keep changes
+	undo = reset HEAD~1 --mixed
+
+	# Hard reset
+	nuke = reset --hard HEAD
+
+	# List branches
+	br = branch -v
+	bra = branch -av
+
+	# Checkout
+	co = checkout
+	cob = checkout -b
+
+	# Stash
+	save = stash save
+	pop = stash pop
+
+	# Pull with rebase
+	up = pull --rebase --autostash
+
+	# Clean up merged branches
+	cleanup = "!git for-each-ref --format='%(refname:short)' refs/heads --merged | grep -vE '^(main|master|develop)$' | while read branch; do git branch -d \"$branch\"; done"
+
+	# Show file at specific commit
+	show-file = "!f() { git show $1:$2; }; f"
+
+	# Contributors
+	contributors = shortlog --summary --numbered --email
+
+[color]
+	ui = auto
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+# Include local config (user-specific)
+[include]
+	path = ~/.gitconfig.local
