@@ -58,26 +58,6 @@ return {
     },
     config = function(_, opts)
       require("typescript-tools").setup(opts)
-
-      -- Optional: double-guard via LspAttach (in case other configs run later)
-      vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args)
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if not client or client.name ~= "typescript-tools" then
-            return
-          end
-          local bufnr = args.buf
-          if client.server_capabilities.semanticTokensProvider then
-            client.server_capabilities.semanticTokensProvider = nil
-          end
-          if client.server_capabilities.codeLensProvider then
-            client.server_capabilities.codeLensProvider = nil
-          end
-          if vim.lsp.inlay_hint then
-            pcall(vim.lsp.inlay_hint.enable, false, { bufnr = bufnr })
-          end
-        end,
-      })
     end,
   },
 
@@ -89,6 +69,11 @@ return {
         -- Most LazyVim versions accept `enabled = false`:
         tsserver = { enabled = false },
         vtsls = { enabled = false },
+        eslint = {
+          settings = {
+            workingDirectory = { mode = "auto" },
+          },
+        },
       },
       -- For older LazyVim versions, this prevents setup if `enabled` is ignored:
       setup = {
