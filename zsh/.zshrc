@@ -5,6 +5,11 @@
 [[ $- != *i* ]] && return
 
 # --- Completions setup (early) ---
+# Docker CLI completions path (must be set before compinit)
+if [[ -d "$HOME/.docker/completions" ]]; then
+  fpath=("$HOME/.docker/completions" $fpath)
+fi
+
 autoload -Uz compinit
 _compdump="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-${ZSH_VERSION}"
 mkdir -p "${_compdump:h}"
@@ -157,6 +162,19 @@ setopt INTERACTIVE_COMMENTS # allow comments in interactive mode
 setopt HIST_IGNORE_ALL_DUPS # remove older duplicate entries from history
 setopt HIST_REDUCE_BLANKS   # remove blanks from history
 setopt SHARE_HISTORY        # share history between sessions
+
+# --- Option+Arrow keybindings (Ghostty Alt sequences) ---
+for keymap in emacs viins vicmd; do
+  [[ -n ${terminfo[kLFT3]} ]] && bindkey -M "$keymap" "${terminfo[kLFT3]}" backward-word
+  [[ -n ${terminfo[kRIT3]} ]] && bindkey -M "$keymap" "${terminfo[kRIT3]}" forward-word
+  [[ -n ${terminfo[kUP3]} ]] && bindkey -M "$keymap" "${terminfo[kUP3]}" up-line-or-history
+  [[ -n ${terminfo[kDN3]} ]] && bindkey -M "$keymap" "${terminfo[kDN3]}" down-line-or-history
+
+  bindkey -M "$keymap" $'\e[1;3D' backward-word
+  bindkey -M "$keymap" $'\e[1;3C' forward-word
+  bindkey -M "$keymap" $'\e[1;3A' up-line-or-history
+  bindkey -M "$keymap" $'\e[1;3B' down-line-or-history
+done
 
 # bun completions
 [ -s "/Users/vladimir.shchedrin/.bun/_bun" ] && source "/Users/vladimir.shchedrin/.bun/_bun"
