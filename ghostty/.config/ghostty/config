@@ -3,10 +3,16 @@
 
 # Theme
 theme = Catppuccin Macchiato
+background = #24273a
+foreground = #cad3f5
+cursor-color = #f4dbd6
+selection-background = #5b6078
+selection-foreground = #cad3f5
 
 # Font
-font-family = JetBrains Mono
-font-size = 13
+# Use a Nerd Font directly so tmux/powerline glyphs render without fallbacks.
+font-family = FiraCode Nerd Font
+font-size = 14
 font-thicken = true
 
 # Window
@@ -38,6 +44,8 @@ macos-titlebar-style = tabs
 keybind = cmd+backspace=text:\x15
 keybind = opt+backspace=text:\x17
 keybind = command+k=text:\x0c
+keybind = cmd+left=esc:\x4f\x48
+keybind = cmd+right=esc:\x4f\x46
 keybind = shift+enter=text:\x1b\r
 
 # Tab/Window management (don't conflict with Zellij)
