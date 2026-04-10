@@ -44,6 +44,8 @@ if [[ -f "$BREW_PREFIX/opt/antidote/share/antidote/antidote.zsh" ]]; then
   fi
   source ${zsh_plugins}.zsh
 fi
+# Emacs line editing (no viins/vicmd); overrides bindkey -v from plugins or ~/.zsh_plugins.zsh
+bindkey -e
 
 # --- Starship prompt ---
 if command -v starship >/dev/null 2>&1; then
@@ -163,8 +165,11 @@ setopt HIST_IGNORE_ALL_DUPS # remove older duplicate entries from history
 setopt HIST_REDUCE_BLANKS   # remove blanks from history
 setopt SHARE_HISTORY        # share history between sessions
 
-# --- Option+Arrow keybindings (Ghostty Alt sequences) ---
-for keymap in emacs viins vicmd; do
+# bun completions
+[ -s "/Users/vladimir.shchedrin/.bun/_bun" ] && source "/Users/vladimir.shchedrin/.bun/_bun"
+
+# --- Option+Arrow (Ghostty Alt / CSI 1;3*) — emacs keymap; last so Atuin etc. do not overwrite ---
+for keymap in emacs; do
   [[ -n ${terminfo[kLFT3]} ]] && bindkey -M "$keymap" "${terminfo[kLFT3]}" backward-word
   [[ -n ${terminfo[kRIT3]} ]] && bindkey -M "$keymap" "${terminfo[kRIT3]}" forward-word
   [[ -n ${terminfo[kUP3]} ]] && bindkey -M "$keymap" "${terminfo[kUP3]}" up-line-or-history
@@ -175,6 +180,8 @@ for keymap in emacs viins vicmd; do
   bindkey -M "$keymap" $'\e[1;3A' up-line-or-history
   bindkey -M "$keymap" $'\e[1;3B' down-line-or-history
 done
-
-# bun completions
-[ -s "/Users/vladimir.shchedrin/.bun/_bun" ] && source "/Users/vladimir.shchedrin/.bun/_bun"
+# Cmd+←/→ (Ghostty): CSI 1~/4~ in tmux; SS3 OH/OF if terminal sends that instead
+bindkey -M emacs $'\e[1~' beginning-of-line
+bindkey -M emacs $'\e[4~' end-of-line
+bindkey -M emacs $'\eOH' beginning-of-line
+bindkey -M emacs $'\eOF' end-of-line

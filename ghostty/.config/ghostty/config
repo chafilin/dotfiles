@@ -37,15 +37,24 @@ cursor-style = block
 cursor-style-blink = true
 
 # macOS specific
-macos-option-as-alt = left
+# true = both Option keys send Alt (matches zsh Option+arrow bindkeys)
+macos-option-as-alt = true
 macos-titlebar-style = tabs
 
 # Keybindings (macOS-friendly)
 keybind = cmd+backspace=text:\x15
 keybind = opt+backspace=text:\x17
-keybind = command+k=text:\x0c
-keybind = cmd+left=esc:\x4f\x48
-keybind = cmd+right=esc:\x4f\x46
+# Form feed = Ctrl+L = zsh clear-screen. Avoid ESC-led sequences (\e[2J…) — ESC toggles vi
+# insert/command and flips Starship’s character. vim-tmux: @vim_navigator_mapping_right null.
+keybind = cmd+k=text:\x0c
+# xterm-style Home/End (CSI 1~ / 4~) — matches tmux-256color khome/kend; SS3 OH/OF is flaky through tmux
+keybind = cmd+left=text:\x1b[1~
+keybind = cmd+right=text:\x1b[4~
+# Same CSI sequences as Option+arrow (see zsh .zshrc bindkey for \e[1;3* )
+keybind = super+alt+left=csi:1;3D
+keybind = super+alt+right=csi:1;3C
+keybind = super+alt+up=csi:1;3A
+keybind = super+alt+down=csi:1;3B
 keybind = shift+enter=text:\x1b\r
 
 # Tab/Window management (don't conflict with Zellij)
