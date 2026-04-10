@@ -29,6 +29,7 @@ brew install duf            # Modern df
 echo 'Installing terminal & multiplexer...'
 brew install --cask ghostty  # Modern terminal
 brew install zellij         # Modern multiplexer
+brew install tmux-mem-cpu-load  # Used by tmux status (see tmux/.tmux.conf)
 
 echo 'Installing development tools...'
 brew install neovim
