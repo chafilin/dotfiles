@@ -185,3 +185,6 @@ bindkey -M emacs $'\e[1~' beginning-of-line
 bindkey -M emacs $'\e[4~' end-of-line
 bindkey -M emacs $'\eOH' beginning-of-line
 bindkey -M emacs $'\eOF' end-of-line
+
+# Use 1Password SSH agent as default (required for SSH signing with 1Password keys)
+export SSH_AUTH_SOCK=~/.1password/agent.sock
