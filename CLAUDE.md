@@ -1,107 +1,85 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working in this repository.
 
 ## Repository Overview
 
-This is a personal dotfiles repository managed using GNU Stow. It contains configuration files for a macOS development environment including terminal emulators, shell, text editor, and multiplexer configurations.
+This is a personal macOS dotfiles repository managed with GNU Stow. The default stack is zsh, Ghostty, tmux, Neovim, Git, mise, and modern CLI tools.
 
-## Installation Commands
+## Setup
 
-**Full setup (fresh system):**
+Fresh install:
+
 ```bash
 sh ./scripts/install.sh
 ```
 
-This runs installation scripts in sequence:
-1. `brew.sh` - Installs Homebrew and essential CLI tools (git, eza, fzf, gh, bat, stow, zellij, tmux, zoxide, neovim, lazygit, ripgrep, fd, alacritty)
-2. `oh-my-zsh.sh` - Installs Oh My Zsh framework
-3. `stow.sh` - Interactively stows configuration files to home directory
-4. `langs.sh` - Optionally installs language tools (nvm, pnpm, rbenv, rust)
+Script sequence:
 
-**Apply/update specific configurations:**
+1. `brew.sh` installs Homebrew when missing and installs the default tool stack.
+2. `stow.sh` interactively stows zsh, Neovim, Git, Ghostty, and tmux configs.
+3. `langs.sh` optionally installs language tools.
+
+Manual stow:
+
 ```bash
-# Apply individual configuration to home directory
 stow -t ~/. zsh
 stow -t ~/. nvim
-stow -t ~/. tmux
+stow -t ~/. git
 stow -t ~/. ghostty
-stow -t ~/. zellij
-stow -t ~/. allacritty
-stow -t ~/. sketchybar
+stow -t ~/. tmux
+```
 
-# Remove symlinks
+Remove symlinks:
+
+```bash
 stow -D -t ~/. <package-name>
-
-# Restow (useful after config changes)
-stow -R -t ~/. <package-name>
 ```
 
 ## Architecture
 
-### Stow-based Management
+Each top-level directory is a Stow package. The package structure mirrors the target path under `$HOME`.
 
-Each top-level directory (zsh, nvim, tmux, etc.) is a "stow package" containing the directory structure that mirrors where files should be placed in the home directory. When stowed, GNU Stow creates symlinks from `~/.config/nvim/...` to `~/Developer/dotfiles/nvim/.config/nvim/...`.
+- `zsh/` - fast zsh config, native prompt, Antidote plugin list.
+- `nvim/` - LazyVim-based Neovim config.
+- `tmux/` - tmux config using TPM, Catppuccin, CPU, and battery plugins.
+- `ghostty/` - Ghostty terminal config.
+- `git/` - Git config with delta.
+- `scripts/` - install, stow, cleanup, and benchmark helpers.
 
-### Directory Structure
+## Conventions
 
-- `zsh/` - Zsh shell configuration with Oh My Zsh
-  - `.zshrc` - Main configuration (plugins, aliases, exports)
-  - `.zsh/custom/plugins/` - Git submodules for zsh plugins (zsh-autosuggestions, fzf-tab, zsh-syntax-highlighting)
+Zsh plugins are managed through Antidote via `zsh/.zsh_plugins.txt`. Keep startup plugins minimal; the default list intentionally excludes rich completion bundles.
 
-- `nvim/` - Neovim configuration using LazyVim
-  - `lua/config/` - LazyVim core configuration
-  - `lua/plugins/` - Custom plugin overrides and additions
-  - Plugins loaded via lazy.nvim package manager
+Neovim follows LazyVim conventions:
 
-- `tmux/` - tmux terminal multiplexer
-  - `.tmux.conf` - Uses TPM (tmux plugin manager) with catppuccin theme
-  - Prefix key: `C-space`
-  - Vim-style pane navigation (h/j/k/l)
+- Core LazyVim is imported in `lua/config/lazy.lua`.
+- Custom plugins live in `lua/plugins/*.lua`.
+- Each plugin file exports a plugin spec table.
 
-- `ghostty/` - Ghostty terminal emulator configuration
-- `sketchybar/` - macOS menu bar replacement configuration
-- `zellij/` - Alternative terminal multiplexer configuration
-- `scripts/` - Installation and setup automation
+tmux plugins are managed by TPM:
 
-### Key Conventions
-
-**Git Submodules:** Zsh plugins are managed as git submodules. When cloning, use:
 ```bash
-git clone --recurse-submodules <repo-url>
-# Or if already cloned:
-git submodule update --init --recursive
+# Inside tmux: prefix + I
+# Or:
+~/.tmux/plugins/tpm/bin/install_plugins
 ```
 
-**LazyVim Structure:** The nvim configuration follows LazyVim's convention where:
-- Core LazyVim is imported automatically
-- Custom plugins go in `lua/plugins/*.lua`
-- Each plugin file exports a table with plugin specifications
-- Existing configurations include: surround, test runners, theme (catppuccin), tmux-vim navigation, treesitter, typescript, UI tweaks, and web-icons
+The tmux prefix is `Ctrl+a`, and `prefix + r` reloads `~/.tmux.conf`.
 
-**Tmux Plugin Manager:** Tmux plugins are installed via TPM. After configuration changes:
-```bash
-# Inside tmux, press prefix (C-space) + I to install new plugins
-# Or run: ~/.tmux/plugins/tpm/bin/install_plugins
-```
+## Config Locations
 
-**Theme Consistency:** The configuration uses Catppuccin Macchiato theme across tmux and likely other tools for visual consistency.
+After stowing:
 
-## Configuration File Locations
+- `~/.zshrc` -> `dotfiles/zsh/.zshrc`
+- `~/.config/nvim/` -> `dotfiles/nvim/.config/nvim/`
+- `~/.gitconfig` -> `dotfiles/git/.gitconfig`
+- `~/.config/ghostty/` -> `dotfiles/ghostty/.config/ghostty/`
+- `~/.tmux.conf` -> `dotfiles/tmux/.tmux.conf`
 
-After stowing, actual config files are symlinked to:
-- `~/.zshrc` → dotfiles/zsh/.zshrc
-- `~/.config/nvim/` → dotfiles/nvim/.config/nvim/
-- `~/.tmux.conf` → dotfiles/tmux/.tmux.conf
-- `~/.config/ghostty/` → dotfiles/ghostty/.config/ghostty/
-- `~/.config/sketchybar/` → dotfiles/sketchybar/.config/sketchybar/
+## Working Rules
 
-## Common Modifications
-
-When modifying configurations:
-
-1. **Edit files in the dotfiles repo**, not the symlinked versions in home directory
-2. **For nvim plugins:** Add new files to `nvim/.config/nvim/lua/plugins/` following LazyVim plugin spec format
-3. **For zsh plugins:** Add to `plugins=()` array in `.zshrc`, or install as git submodule in `.zsh/custom/plugins/`
-4. **For tmux:** Edit `.tmux.conf`, reload with `prefix + r` (bound in config)
-5. **Commit and push changes** to maintain version control of dotfiles
+- Edit files in the repository, not the symlinked targets under `$HOME`.
+- Preserve unrelated user changes in the dirty worktree.
+- Prefer focused edits over broad rewrites unless the config has intentionally changed direction.
+- Verify zsh changes with `zsh -n zsh/.zshrc` and `zsh-bench` when practical.

@@ -46,10 +46,7 @@ echo ""
 unstow_package "zsh" "Zsh configuration"
 unstow_package "nvim" "Neovim configuration"
 unstow_package "git" "Git configuration"
-unstow_package "starship" "Starship prompt"
-unstow_package "atuin" "Atuin history"
 unstow_package "ghostty" "Ghostty terminal"
-unstow_package "zellij" "Zellij multiplexer"
 unstow_package "tmux" "Tmux configuration"
 
 # Clean up cache and generated files
@@ -80,20 +77,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "✓ Neovim cache and plugins removed"
 fi
 
-read -p "Remove Atuin database? (WARNING: This deletes your shell history!) (y/n) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    rm -rf ~/.local/share/atuin
-    echo "✓ Atuin database removed"
-fi
-
-read -p "Remove Zellij cache? (y/n) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    rm -rf ~/.cache/zellij
-    echo "✓ Zellij cache removed"
-fi
-
 # Optional: Uninstall packages
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -113,9 +96,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     # Core tools
     packages=(
         "antidote"
-        "starship"
-        "atuin"
-        "zellij"
         "eza"
         "bat"
         "fd"
@@ -126,6 +106,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "procs"
         "dust"
         "duf"
+        "tmux-mem-cpu-load"
         "fzf"
         "direnv"
         "mise"

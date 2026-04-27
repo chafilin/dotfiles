@@ -1,51 +1,56 @@
-echo 'Installing brew'
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#!/usr/bin/env bash
+# Install the default fast-stack tools.
+
+set -euo pipefail
 
 if ! command -v brew >/dev/null 2>&1; then
-  echo "Error: Homebrew installation failed or 'brew' is not available on PATH." >&2
+  echo "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+fi
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Error: Homebrew installation failed or brew is not available on PATH." >&2
   exit 1
 fi
-echo 'Installing essential tools...'
-brew install git
-brew install stow
 
-echo 'Installing shell tools...'
-brew install antidote        # Fast zsh plugin manager
-brew install starship        # Modern prompt
-brew install atuin          # Modern shell history
+echo "Installing Homebrew formulae..."
+formulae=(
+  git
+  stow
+  antidote
+  eza
+  bat
+  fd
+  ripgrep
+  sd
+  zoxide
+  bottom
+  procs
+  dust
+  duf
+  tmux
+  tmux-mem-cpu-load
+  neovim
+  fzf
+  gh
+  direnv
+  mise
+  git-delta
+  jesseduffield/lazygit/lazygit
+  jesseduffield/lazydocker/lazydocker
+  httpie
+  jq
+  yq
+  glow
+  tlrc
+)
+brew install "${formulae[@]}"
 
-echo 'Installing modern CLI replacements (Rust-based)...'
-brew install eza            # Modern ls
-brew install bat            # Modern cat
-brew install fd             # Modern find
-brew install ripgrep        # Modern grep
-brew install sd             # Modern sed
-brew install zoxide         # Smart cd
-brew install bottom         # Modern top
-brew install procs          # Modern ps
-brew install dust           # Modern du
-brew install duf            # Modern df
-
-echo 'Installing terminal & multiplexer...'
-brew install --cask ghostty  # Modern terminal
-brew install zellij         # Modern multiplexer
-brew install tmux-mem-cpu-load  # Used by tmux status (see tmux/.tmux.conf)
-
-echo 'Installing development tools...'
-brew install neovim
-brew install fzf
-brew install gh
-brew install direnv         # Environment management
-brew install mise           # Modern asdf alternative
-
-echo 'Installing Git tools...'
-brew install git-delta      # Beautiful git diffs
-brew install jesseduffield/lazygit/lazygit
-brew install jesseduffield/lazydocker/lazydocker
-
-echo 'Installing productivity tools...'
-brew install httpie         # Modern curl
-brew install jq             # JSON processor
-brew install yq             # YAML processor
-brew install glow           # Markdown renderer
-brew install tlrc           # Modern man pages
+echo "Installing Homebrew casks..."
+brew install --cask ghostty

@@ -19,17 +19,17 @@ echo ""
 
 # Install Homebrew and tools
 echo "→ Installing Homebrew and essential tools..."
-source ./scripts/brew.sh
+./scripts/brew.sh
 
 # Stow configurations
 echo ""
 echo "→ Setting up dotfiles..."
-source ./scripts/stow.sh
+./scripts/stow.sh
 
 # Install language tools (optional)
 echo ""
 echo "→ Installing language tools..."
-source ./scripts/langs.sh
+./scripts/langs.sh
 
 # Post-install setup
 echo ""
@@ -48,31 +48,16 @@ else
   echo "⚠ Antidote not found. Please install with: brew install antidote"
 fi
 
-# Initialize Atuin
-echo ""
-echo "→ Setting up Atuin (shell history)..."
-if command -v atuin >/dev/null 2>&1; then
-  echo "✓ Atuin installed. Register at https://atuin.sh to sync history across machines (optional)"
-  echo "  Or keep it local - it works great offline too!"
-else
-  echo "⚠ Atuin not found."
-fi
-
-# Starship
-echo ""
-echo "→ Starship prompt ready"
-echo "  Custom configuration at ~/.config/starship.toml"
-
 # Ghostty
 echo ""
 echo "→ Ghostty terminal configured"
 echo "  Launch Ghostty to use the new configuration"
 
-# Zellij
+# Tmux
 echo ""
-echo "→ Zellij multiplexer configured"
-echo "  Alt-based keybindings (no conflicts with Neovim)"
-echo "  Usage: Run 'zellij' or alias 'z'"
+echo "→ Tmux multiplexer configured"
+echo "  Prefix: Ctrl+a"
+echo "  Install/update plugins inside tmux with: prefix + I"
 
 # Neovim
 echo ""
@@ -96,13 +81,12 @@ echo "Next steps:"
 echo "  1. Restart your terminal or run: exec zsh"
 echo "  2. Launch Ghostty terminal emulator"
 echo "  3. Open nvim to install plugins"
-echo "  4. Try 'zellij' to start the multiplexer"
+echo "  4. Run 'tmux' or alias 't' to start the multiplexer"
 echo "  5. Run 'zsh-bench' to check shell startup time (<50ms target)"
 echo ""
 echo "Key features:"
-echo "  • Starship prompt - beautiful and fast"
-echo "  • Atuin - searchable shell history (Ctrl+R)"
-echo "  • Zellij - modern multiplexer (Alt+key bindings)"
+echo "  • Native zsh prompt - styled without external prompt processes"
+echo "  • Tmux - plugin-based status and pane workflow"
 echo "  • Delta - syntax-highlighted git diffs"
 echo "  • Modern CLI tools: eza, bat, fd, ripgrep, zoxide, and more"
 echo ""

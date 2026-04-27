@@ -22,6 +22,7 @@ window-decoration = auto
 window-theme = auto
 
 # Behavior
+command = /bin/zsh
 mouse-hide-while-typing = true
 clipboard-read = allow
 clipboard-write = allow
@@ -44,8 +45,8 @@ macos-titlebar-style = tabs
 # Keybindings (macOS-friendly)
 keybind = cmd+backspace=text:\x15
 keybind = opt+backspace=text:\x17
-# Form feed = Ctrl+L = zsh clear-screen. Avoid ESC-led sequences (\e[2J…) — ESC toggles vi
-# insert/command and flips Starship’s character. vim-tmux: @vim_navigator_mapping_right null.
+# Form feed = Ctrl+L = zsh clear-screen. Avoid ESC-led sequences (\e[2J...)
+# because ESC-led sequences can interact badly with shell/editor modes.
 keybind = cmd+k=text:\x0c
 # xterm-style Home/End (CSI 1~ / 4~) — matches tmux-256color khome/kend; SS3 OH/OF is flaky through tmux
 keybind = cmd+left=text:\x1b[1~

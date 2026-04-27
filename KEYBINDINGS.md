@@ -1,27 +1,23 @@
 # Keybinding Reference
 
-This document outlines all keybindings across the stack to ensure no conflicts between tools.
+The default stack keeps layers separate:
 
-## Design Philosophy
+- **Ghostty**: `Cmd` for terminal tabs, windows, and clipboard actions.
+- **tmux**: `Ctrl+a` prefix for panes, windows, status, and sessions.
+- **Neovim**: `Space` leader plus `Ctrl` combinations.
+- **Shell**: `Ctrl`/`Alt` bindings for history, words, and fzf widgets.
 
-- **Zellij**: All `Alt` (Option) key combinations
-- **Neovim**: `Space` leader + `Ctrl` combinations
-- **Ghostty**: `Cmd` (macOS) combinations for terminal operations
-- **No conflicts**: Each layer uses distinct modifier keys
+## Ghostty
 
----
+### Window And Tab Management
 
-## Ghostty Terminal
-
-All terminal-level keybindings use `Cmd` (macOS):
-
-### Window/Tab Management
 - `Cmd+T` - New tab
 - `Cmd+W` - Close tab/window
 - `Cmd+N` - New window
 - `Cmd+1-9` - Switch to tab 1-9
 
 ### Text Operations
+
 - `Cmd+C` - Copy
 - `Cmd+V` - Paste
 - `Cmd+K` - Clear screen
@@ -30,131 +26,110 @@ All terminal-level keybindings use `Cmd` (macOS):
 - `Shift+Enter` - Send literal Enter
 
 ### View
+
 - `Cmd+Plus` - Increase font size
 - `Cmd+Minus` - Decrease font size
 - `Cmd+0` - Reset font size
 
----
+## tmux
 
-## Zellij Multiplexer
+Prefix: `Ctrl+a`
 
-**ALL keybindings use `Alt` (Option) modifier** - no conflicts with Neovim!
+### Core
 
-### Mode Switching
-- `Alt+G` - Lock mode (pass keys to terminal)
-- `Alt+P` - Pane mode
-- `Alt+T` - Tab mode
-- `Alt+R` - Resize mode
-- `Alt+S` - Scroll mode
-- `Alt+M` - Move mode
-- `Alt+O` - Session mode
-- `Alt+Q` - Quit
+- `prefix + r` - Reload `~/.tmux.conf`
+- `prefix + Ctrl+a` - Send prefix to nested tmux/session
+- `prefix + c` - New window
+- `prefix + ,` - Rename window
+- `prefix + &` - Kill window
+- `prefix + d` - Detach
+- `prefix + [` - Copy mode
 
-### Quick Actions (from any mode)
-- `Alt+N` - New pane
-- `Alt+H/J/K/L` - Navigate panes (vim-style)
-- `Alt+Left/Right` - Navigate panes/tabs
-- `Alt+[` - Previous swap layout
-- `Alt+]` - Next swap layout
+### Pane Navigation
 
-### Pane Mode (`Alt+P` then...)
-- `N` - New pane
-- `J` - New pane down
-- `L` - New pane right
-- `X` - Close pane
-- `F` - Toggle fullscreen
-- `E` - Toggle embed/float
-- `Z` - Toggle pane frames
-- `W` - Toggle floating panes
-- `R` - Rename pane
-- `C` - Clear pane
+- `prefix + h` - Select pane left
+- `prefix + j` - Select pane down
+- `prefix + k` - Select pane up
+- `prefix + l` - Select pane right
 
-### Tab Mode (`Alt+T` then...)
-- `N` - New tab
-- `X` - Close tab
-- `R` - Rename tab
-- `H/L` - Move tab left/right
-- `1-9` - Go to tab 1-9
-- `B` - Break pane to new tab
+### Pane Resize
 
-### Resize Mode (`Alt+R` then...)
-- `H/J/K/L` - Resize pane (vim-style)
-- `Left/Down/Up/Right` - Resize pane (arrows)
+- `prefix + H` - Resize left by 5
+- `prefix + J` - Resize down by 5
+- `prefix + K` - Resize up by 5
+- `prefix + L` - Resize right by 5
 
-### Scroll Mode (`Alt+S` then...)
-- `J/K` - Scroll down/up
-- `D` - Half page down
-- `U` - Half page up
-- `PageDown/PageUp` - Page scroll
-- `Home/End` - Scroll to top/bottom
-- `S` - Enter search
+### Plugins
 
-### Session Mode (`Alt+O` then...)
-- `D` - Detach session
-- `W` - Session manager (floating)
+- `prefix + I` - Install TPM plugins
+- `prefix + U` - Update TPM plugins
+- `prefix + Alt+u` - Clean removed TPM plugins
 
----
+## Neovim
 
-## Neovim (LazyVim)
+### Leader
 
-Uses `Space` as leader and `Ctrl` combinations - **no Alt keys!**
-
-### Leader Key
-- `Space` - Leader key (all commands below start with Space)
+- `Space` - Leader key
 
 ### File Navigation
-- `<leader>ff` - Find files (Telescope)
-- `<leader>fg` - Live grep (Telescope)
-- `<leader>fb` - Find buffers (Telescope)
-- `<leader>fr` - Recent files (Telescope)
-- `<leader>e` - File explorer (Neo-tree)
 
-### Harpoon (Quick File Bookmarks)
-- `<leader>a` - Add file to harpoon
-- `<leader>h` - Toggle harpoon menu
-- `<leader>1-4` - Jump to harpoon file 1-4
-- `Ctrl+Shift+P` - Previous harpoon file
-- `Ctrl+Shift+N` - Next harpoon file
+- `<leader>ff` - Find files
+- `<leader>fg` - Live grep
+- `<leader>fb` - Find buffers
+- `<leader>fr` - Recent files
+- `<leader>e` - File explorer
 
-### Flash (Jump Navigation)
-- `s` - Flash jump (normal/visual/operator mode)
-- `S` - Flash treesitter (structure-aware)
-- `r` - Remote flash (operator mode)
+### Harpoon
+
+- `<leader>a` - Add file
+- `<leader>h` - Toggle menu
+- `<leader>1-4` - Jump to Harpoon file 1-4
+- `Ctrl+Shift+P` - Previous Harpoon file
+- `Ctrl+Shift+N` - Next Harpoon file
+
+### Flash
+
+- `s` - Flash jump
+- `S` - Flash treesitter
+- `r` - Remote flash in operator mode
 - `R` - Treesitter search
-- `Ctrl+S` - Toggle flash search (command mode)
+- `Ctrl+S` - Toggle Flash search in command mode
 
-### Window Navigation (Vim-style)
+### Windows
+
 - `Ctrl+H` - Left window
 - `Ctrl+J` - Down window
 - `Ctrl+K` - Up window
 - `Ctrl+L` - Right window
-- **Works with Zellij panes via Alt+H/J/K/L!**
+- `Ctrl+Down` - Decrease window width
+- `Ctrl+Up` - Increase window width
 
 ### LSP
+
 - `gd` - Go to definition
 - `gr` - Go to references
 - `K` - Hover documentation
 - `<leader>ca` - Code actions
 - `<leader>rn` - Rename symbol
-- `<leader>cf` - Format buffer (Conform)
+- `<leader>cf` - Format buffer
 
-### Git (Gitsigns)
-- `]c` - Next git hunk
-- `[c` - Previous git hunk
+### Git
+
+- `]c` - Next hunk
+- `[c` - Previous hunk
 - `<leader>gs` - Stage hunk
 - `<leader>gr` - Reset hunk
 - `<leader>gS` - Stage buffer
 - `<leader>gp` - Preview hunk
 - `<leader>gb` - Blame line
 - `<leader>gd` - Diff this
-
-### Git (Diffview)
-- `<leader>gv` - Open diffview
-- `<leader>gc` - Close diffview
+- `<leader>gv` - Open Diffview
+- `<leader>gc` - Close Diffview
 - `<leader>gh` - File history
 - `<leader>gH` - Project history
 
-### Trouble (Diagnostics)
+### Diagnostics
+
 - `<leader>xx` - Toggle diagnostics
 - `<leader>xX` - Buffer diagnostics
 - `<leader>cs` - Symbols
@@ -162,85 +137,53 @@ Uses `Space` as leader and `Ctrl` combinations - **no Alt keys!**
 - `<leader>xL` - Location list
 - `<leader>xQ` - Quickfix list
 
-### Terminal
+### Terminal And Tabs
+
 - `Ctrl+/` - Toggle terminal
 - `Ctrl+\` - New terminal
-
-### Tabs
-- `<leader><tab>l` - Last tab
-- `<leader><tab>f` - First tab
 - `<leader><tab><tab>` - New tab
 - `<leader><tab>]` - Next tab
 - `<leader><tab>[` - Previous tab
 - `<leader><tab>d` - Close tab
 
-### Miscellaneous
-- `<leader>qq` - Quit all
-- `<leader>gg` - Lazygit
-- `<leader>l` - Lazy (plugin manager)
-- `<leader>:` - Command history
-
----
-
-## Shell (Zsh)
-
-### History (Atuin)
-- `Ctrl+R` - Search history (Atuin fuzzy search)
-- `Up Arrow` - Normal history (Atuin disabled for up)
+## Shell
 
 ### FZF
+
 - `Ctrl+T` - File search
-- `Ctrl+R` - Command history (if Atuin not available)
 - `Alt+C` - Directory search
 
-### Zoxide
-- `cd <partial>` - Smart cd with frecency
+### Line Editing
+
+- `Option+Left` - Backward word
+- `Option+Right` - Forward word
+- `Option+Up` - Previous history line
+- `Option+Down` - Next history line
+- `Cmd+Left` - Beginning of line
+- `Cmd+Right` - End of line
+
+### zoxide
+
+- `cd <partial>` - Jump by frecency
 - `cd -` - Previous directory
-
----
-
-## Summary Table
-
-| Tool | Modifier Keys | Purpose |
-|------|--------------|---------|
-| **Ghostty** | `Cmd` | Terminal window/tab management |
-| **Zellij** | `Alt` | Multiplexer (panes, tabs, sessions) |
-| **Neovim** | `Space`, `Ctrl` | Editor, LSP, file navigation |
-| **Shell** | `Ctrl` | History, fuzzy finding |
-
-## Conflict Resolution
-
-✅ **No conflicts!** Each tool uses distinct modifier keys:
-- Terminal operations: `Cmd` (macOS only)
-- Multiplexer: `Alt` (Option) exclusively
-- Editor: `Space` leader + `Ctrl` keys
-- Navigation works seamlessly: `Ctrl+H/J/K/L` in Neovim, `Alt+H/J/K/L` in Zellij
-
-## Tips
-
-1. **In Neovim**: Use `Ctrl+H/J/K/L` to navigate windows
-2. **In Zellij**: Use `Alt+H/J/K/L` to navigate panes
-3. **Muscle Memory**:
-   - Need to do something in the terminal multiplexer? Think `Alt`
-   - Need to do something in the editor? Think `Space` or `Ctrl`
-   - Need terminal tab/window? Think `Cmd` (macOS)
-
-4. **Zellij Lock Mode**: Press `Alt+G` to lock Zellij and pass all keys through to the terminal/Neovim. This is useful when you need all keybindings to go to the application.
 
 ## Common Workflows
 
-### Working with Multiple Files
-1. Add files to Harpoon: `<leader>a`
-2. Switch between them: `<leader>1`, `<leader>2`, etc.
-3. Or use `<leader>h` to see the menu
+### Multiple Files
 
-### Git Workflow
-1. Stage hunks as you go: `<leader>gs`
-2. Preview changes: `<leader>gp`
-3. Open Lazygit for complex operations: `<leader>gg`
-4. View file history: `<leader>gh`
+1. Add files to Harpoon with `<leader>a`.
+2. Jump with `<leader>1`, `<leader>2`, `<leader>3`, or `<leader>4`.
+3. Use `<leader>h` when you need the menu.
 
-### Pane/Window Management
-1. **In Neovim**: Split with `:split` or `:vsplit`, navigate with `Ctrl+H/J/K/L`
-2. **In Zellij**: `Alt+P` then `J` or `L` for new panes, navigate with `Alt+H/J/K/L`
-3. **Best Practice**: Use Neovim splits for code, Zellij panes for different tasks (editor, terminal, logs)
+### Git
+
+1. Stage hunks with `<leader>gs`.
+2. Preview changes with `<leader>gp`.
+3. Open Lazygit with `<leader>gg`.
+4. Inspect history with `<leader>gh`.
+
+### Panes
+
+1. Use Neovim splits for code layout.
+2. Use tmux panes for separate tasks such as editor, server, logs, and shell.
+3. Use `prefix + h/j/k/l` for tmux panes and `Ctrl+H/J/K/L` for Neovim windows.
